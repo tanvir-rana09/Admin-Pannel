@@ -1,19 +1,18 @@
 
 import { configureStore } from "@reduxjs/toolkit";
-import colorSlice  from "./colorSlice";
-import darkSlice  from "./darkSlice";
+import colorSlice from "./colorSlice";
+import darkSlice from "./darkSlice";
 import customizeSlice from "./customize";
+import userSlice from "./userSlice";
 
 export const store = configureStore({
-	reducer:{
-		color:colorSlice,
+	reducer: {
+		color: colorSlice,
 		dark: darkSlice,
-		customize:customizeSlice
+		customize: customizeSlice,
+		user: userSlice,
 	},
-	// reducer: {
-	// 	color: colorSlice,
-	// 	dark: darkSlice,
-	// }
+
 })
 
-export default store
+export default store;

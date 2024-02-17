@@ -39,7 +39,7 @@ const Heading = () => {
 					}} className={`${dark === 'dark' ? 'bg-lightBlack1 shadow-md' : ''}  p-1 rounded-full m-0.5 transition-all ease-in-out duration-300`} ><FaMoon size={20} /></button>
 				</div>
 
-				<button onClick={() => setNotification(!notification)} className="p-2 bg-gray-100 rounded-full hover:bg-gray-200 dark:hover:bg-dark" style={{
+				<button onClick={() => setNotification(!notification)} className="p-2 bg-gray-100 dark:bg-dark rounded-full hover:bg-gray-200 dark:hover:bg-dark" style={{
 					color: primary
 				}}>
 					{
@@ -48,7 +48,7 @@ const Heading = () => {
 				</button>
 				<button
 					onClick={() => dispatch(setCustomize(!customize))}
-					className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 dark:hover:bg-dark" style={{
+					className="p-2 rounded-full bg-gray-100 dark:bg-dark hover:bg-gray-200 dark:hover:bg-dark" style={{
 						color: primary
 					}}>
 					{

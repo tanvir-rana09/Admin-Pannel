@@ -47,8 +47,8 @@ const Notification = ({notification,setNotification}) => {
 			<h1 className="text-2xl text-center py-4 border-b mb-5 font-semibold ">Notification</h1>
 			<div className="flex flex-col gap-5">
 				{
-					notifications.map((data) => (
-						<div key={data.name} className="flex dark:bg-lightBlack1 items-center border-b gap-3 px-5">
+					notifications.map((data,i) => (
+						<div key={i} className="flex dark:bg-lightBlack1 items-center border-b gap-3 px-5">
 							<div style={{color:primary}} className="rounded-full bg-gray-200 p-2 dark:bg-dark hover:bg-gray-400 md:text-2xl">
 								<FaRegBell />
 							</div>
