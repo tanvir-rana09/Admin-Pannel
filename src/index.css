@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel&family=Cormorant+Garamond:wght@300&family=Oswald&family=Rethink+Sans&family=Righteous&family=Sen&family=Sevillana&family=Whisper&display=swap');
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+	font-family: 'Sen', sans-serif;
+}
+
+html,body{
+	overflow-x: hidden;
+}
+.dropdown{
+	display: none;
+}
+.setDropdown:hover .dropdown{
+display: block;
+}
