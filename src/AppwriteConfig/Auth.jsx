@@ -53,6 +53,42 @@ export class AuthServices {
 			console.log('this is logout error ' + error);
 		}
 	}
+
+	async changeName(name) {
+		try {
+			return await this.account.updateName(name)
+		} catch (error) {
+			console.log('This Is Change name error' + error);
+		}
+	}
+	async changeEmail({ email, name }) {
+		try {
+			return await this.account.updateEmail(email, name)
+		} catch (error) {
+			console.log('This Is Change email error' + error);
+		}
+	}
+	async changePass({ oldpass, newpass }) {
+		try {
+			return await this.account.updatePassword(oldpass, newpass)
+		} catch (error) {
+			console.log('This Is Change password error' + error);
+		}
+	}
+	async updatePref({fileId}) {
+		try {
+			return await this.account.updatePrefs({ fileId })
+		} catch (error) {
+			console.log("This is pref eerrror " + error);
+		}
+	}
+	async getPref() {
+		try {
+			return await this.account.getPrefs()
+		} catch (error) {
+			console.log("This is pref eerrror " + error);
+		}
+	}
 }
 
 const authServices = new AuthServices();

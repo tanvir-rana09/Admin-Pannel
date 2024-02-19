@@ -58,7 +58,7 @@ const cards = [
       </div>
       <div className="flex justify-between px-4 py-3 bg-white dark:bg-lightBlack1">
         <p>Admin Pannel &copy; 2024 </p>
-        <p>Made by <Link className="font-semibold " style={{color:color}}>MD Tanvir Rana</Link></p>
+        <p>Made by <Link to='https://www.facebook.com/tanvir.rana.world' className="font-semibold " style={{color:color}}>MD Tanvir Rana</Link></p>
       </div>
     </div>
   )

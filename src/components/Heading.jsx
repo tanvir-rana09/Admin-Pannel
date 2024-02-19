@@ -8,7 +8,10 @@ import { MdAdminPanelSettings } from "react-icons/md";
 import { Notification, Settings } from "./Index";
 import { RxCross1 } from "react-icons/rx";
 import { setCustomize } from "../redux/customize";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import authServices from "../AppwriteConfig/Auth";
+import { setLoading, sliceLogout } from "../redux/userSlice";
+import strageServices from "../AppwriteConfig/Data";
 
 const Heading = () => {
 	const primary = useSelector(state => state.color.colors)
@@ -16,12 +19,26 @@ const Heading = () => {
 	const dark = useSelector((state) => state.dark.dark)
 	const dispatch = useDispatch()
 	const { customize } = useSelector(state => state.customize)
+	const navigate = useNavigate()
+	const [file, setFile] = useState()
+	const handleLogout = () => {
+		dispatch(setLoading(true))
+		authServices.logout().then(() => {
+			dispatch(sliceLogout())
+			navigate('/')
+		}).finally(() => dispatch(setLoading(false)))
+	}
 
 	useEffect(() => {
 		document.querySelector('html').classList.remove("light", "dark")
 		document.querySelector('html').classList.add(dark)
 	}, [dark])
 
+	useEffect(() => {
+		authServices.getPref().then((pref) => {
+			setFile(pref)
+		})
+	}, [setFile,file])
 	return (
 		<div className="flex w-full justify-between items-center shadow-lg dark:bg-lightBlack1 dark:text-white md:px-8 px-1 relative">
 			<div>
@@ -56,13 +73,13 @@ const Heading = () => {
 					}
 				</button>
 				<div className="cursor-pointer relative first:hover:last:flex setDropdown">
-					<div>
-						<img className="w-10 rounded-full" src="https://coenterprises.com.au/wp-content/uploads/2018/02/male-placeholder-image.jpeg" alt="profile" />
+					<div className="w-10 h-10">
+						<img className=" rounded-full object-cover h-full w-full" src={ strageServices.getFile(file?.fileId ||'65d2e17ce0a8da14c246')} alt="profile" />
 					</div>
 					<div className="absolute top-10 z-50 md:-right-8 right-0 flex-col bg-white shadow-lg rounded-md text-black overflow-hidden dropdown">
 
 						<button style={{ color: primary }} className="px-7 py-2 hover:bg-gray-100 duration-200 w-full"><Link to='/profile'>Profile</Link></button>
-						<button style={{ color: primary }} className="px-7 py-2 hover:bg-gray-100 duration-200">Logout</button>
+						<button onClick={handleLogout} style={{ color: primary }} className="px-7 py-2 hover:bg-gray-100 duration-200">Logout</button>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 
 
-const Button = ({ icon, text, className, ...props }) => {
+const Button = ({ icon=null, text, className, ...props }) => {
   return (
     <div>
       <button className={`w-full px-6 py-2 flex gap-2 font-semibold ${className}`} {...props}>

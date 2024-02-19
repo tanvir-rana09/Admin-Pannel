@@ -2,13 +2,20 @@ import { useDispatch, useSelector } from "react-redux"
 import { setColor } from "../redux/colorSlice"
 import { setDark } from "../redux/darkSlice"
 import { MdEditRoad } from "react-icons/md"
+import { useEffect } from "react"
 
 const Settings = () => {
   const {colors}=useSelector(state=>state.color)
   const dispatch = useDispatch()
+	const dark = useSelector((state) => state.dark.dark)
+  useEffect(() => {
+		document.querySelector('html').classList.remove("light", "dark")
+		document.querySelector('html').classList.add(dark)
+	}, [dark])
+
   return (
-    <div className="h-screen dark:bg-dark dark:text-gray-300 ">
-      <h2 className="text-center text-2xl py-5 border-b border-gray-900 flex justify-center items-center flex-col"> <span style={{color:colors}}><MdEditRoad size={30} /></span> Settings</h2>
+    <div className="h-screen w-full dark:bg-dark dark:text-gray-300 z-0">
+      <h2 className="text-center text-2xl py-5 border-b border-gray-900 flex justify-center items-center flex-col bg-white dark:bg-dark"> <span style={{color:colors}}><MdEditRoad size={30} /></span> Settings</h2>
       <div className="bg-gray-100 h-full dark:bg-lightBlack1">
       <div className="flex flex-col justify-start w-full items-center  ">
         <h3 className="font-semibold py-3">Choose Theme</h3>

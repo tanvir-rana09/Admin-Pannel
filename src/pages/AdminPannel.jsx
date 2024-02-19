@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom"
 import Heading from "../components/Heading"
 import { Sidebar, Aside } from "../components/Index"
 
@@ -15,6 +16,7 @@ const AdminPannel = () => {
 					<Aside />
 				</div>
 			</div>
+			<Outlet/>
 		</div>
 	)
 }
