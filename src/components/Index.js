@@ -2,7 +2,6 @@ import Card from './Card';
 import Sidebar from './Sidebar';
 import Profile from './../pages/Profile';
 import AdminPannel from './../pages/AdminPannel';
-import Button from './Button';
 import Input from './Input';
 import Aside from './Aside';
 import Notification from './Notification';
@@ -19,7 +18,6 @@ export {
 	Sidebar,
 	Profile,
 	AdminPannel,
-	Button,
 	Input,
 	Aside,
 	Notification,

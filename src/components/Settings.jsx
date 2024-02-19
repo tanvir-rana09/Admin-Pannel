@@ -33,7 +33,6 @@ const Settings = () => {
         <button onClick={()=>dispatch(setColor('#4B49AC'))} className="bg-[#4B49AC] h-8 w-8 rounded-full block shadow-md"></button>
         <button onClick={()=>dispatch(setColor('#AF1763'))} className="bg-[#AF1763] h-8 w-8 rounded-full block shadow-md"></button>
         <button onClick={()=>dispatch(setColor('#198754'))} className="bg-[#198754] h-8 w-8 rounded-full block shadow-md"></button>
-        <button onClick={()=>dispatch(setColor(''))} className="bg-[]"></button>
       </div>
       </div>
     </div>

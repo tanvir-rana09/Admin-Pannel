@@ -39,6 +39,7 @@ const Heading = () => {
 			setFile(pref)
 		})
 	}, [setFile,file])
+	
 	return (
 		<div className="flex w-full justify-between items-center shadow-lg dark:bg-lightBlack1 dark:text-white md:px-8 px-1 relative">
 			<div>

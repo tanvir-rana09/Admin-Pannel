@@ -19,7 +19,6 @@ const ProfileSidebar = () => {
 	useEffect(() => {
 		authServices.getPref().then((pref) => {
 			setFile(pref)
-			// console.log(pref.fileId);
 		})
 
 	}, [setFile])

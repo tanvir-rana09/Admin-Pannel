@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { Button, Input } from "./Index"
+import {  Input } from "./Index"
 import authServices from "../AppwriteConfig/Auth"
 import { useDispatch, useSelector } from "react-redux"
 import { setLoading, sliceLogin } from "../redux/userSlice"

@@ -2,7 +2,7 @@ import { ImProfile } from "react-icons/im";
 import { FaUser } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import strageServices from "../AppwriteConfig/Data";
 import { CiEdit } from "react-icons/ci";
 import { MdFormatListNumbered } from "react-icons/md";
@@ -27,7 +27,7 @@ const ProfileAside = () => {
 
 		authServices.getPref().then((pref) => {
 			setFile(pref)
-			// console.log(pref.fileId);
+
 		})
 	}, [setFile])
 	return (

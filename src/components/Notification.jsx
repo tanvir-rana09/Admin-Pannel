@@ -2,7 +2,7 @@ import { FaRegBell } from "react-icons/fa"
 import { useSelector } from "react-redux"
 
 
-const Notification = ({notification,setNotification}) => {
+const Notification = () => {
 	const primary = useSelector(state => state.color.colors)
 	const notifications = [
 		{

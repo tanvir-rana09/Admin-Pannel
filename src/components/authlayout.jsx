@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom"
 
 const Authlayout = ({ children, authentication }) => {
 	const navigate = useNavigate()
-	const dispatch = useDispatch()
 	const { status } = useSelector(state => state.user)
 
 	useEffect(() => {
