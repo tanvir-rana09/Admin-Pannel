@@ -33,7 +33,7 @@ function App() {
           status ?
             <Routes>
               <Route path="/" element={<AdminPannel />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="profile" element={<Profile />} />
             </Routes>
             :
             <Routes>

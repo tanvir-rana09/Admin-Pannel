@@ -2,7 +2,7 @@ import { ImProfile } from "react-icons/im";
 import { FaUser } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import strageServices from "../AppwriteConfig/Data";
 import { CiEdit } from "react-icons/ci";
 import { MdFormatListNumbered } from "react-icons/md";
@@ -13,27 +13,62 @@ const ProfileAside = () => {
 	const { userData } = useSelector(state => state.user)
 	const primary = useSelector(state => state.color.colors)
 	const [file, setFile] = useState()
+	const [users, setUsers] = useState()
+
 	const changeImage = async (e) => {
+		try {
+			// Get the selected file
+			const file = e.target.files[0];
 
-		strageServices.createFile(e.target.files[0]).then((data) => {
-			authServices.updatePref({
-				fileId: data.$id
-			})
+			// Create a file and update preferences
+			const data = await strageServices.createFile(file);
+			await authServices.updatePref({ fileId: data.$id });
 
-		})
+			// Optionally, perform any additional actions after updating preferences
 
-	}
+		} catch (error) {
+			console.error('Error changing image:', error);
+			// Handle error gracefully, e.g., display an error message to the user
+		}
+	};
+
 	useEffect(() => {
+		const fetchPref = async () => {
+			try {
+				const pref = await authServices.getPref();
+				setFile(pref);
+			} catch (error) {
+				console.error('Error fetching preferences:', error);
+				// Handle error gracefully, e.g., display an error message to the user
+			}
+		};
 
-		authServices.getPref().then((pref) => {
-			setFile(pref)
+		fetchPref();
 
-		})
-	}, [setFile])
+		// Clean-up function (optional)
+		return () => {
+			
+			// Perform any necessary clean-up here, e.g., cancelling network requests
+		};
+	}, [setFile]);
+
+
+	useEffect(() => {
+		const getUsers = async () => {
+			try {
+				authServices.getCurrentUser().then((data) => {
+					setUsers(data)
+				})
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		getUsers()
+	}, [])
 	return (
-		<div className="bg-gray-100  h-screen dark:bg-dark dark:text-white ">
+		<div className="bg-gray-100  h-full dark:bg-dark dark:text-white ">
 			<div className="border-b border-gray-300">
-				<h1 className="flex items-center gap-1 py-3 px-5 text-xl font-semibold">My Profile <ImProfile style={{color:primary}} size={15} /></h1>
+				<h1 className="flex items-center gap-1 py-3 px-5 text-xl font-semibold">My Profile <ImProfile style={{ color: primary }} size={15} /></h1>
 			</div>
 			<div className="w-full">
 				<h2 className="px-5 pt-3 text-xl text-center">Profile Details</h2>
@@ -42,37 +77,37 @@ const ProfileAside = () => {
 						<label className="flex flex-col px-2 gap-2" htmlFor="name">
 							<div className="flex items-center gap-1 justify-between">
 								<div className="flex items-center gap-1">
-									<button><FaUser style={{color:primary}} size={12} /></button> <span>Full Name</span>
+									<button><FaUser style={{ color: primary }} size={12} /></button> <span>Full Name</span>
 								</div>
-								<button className="hover:bg-gray-200 rounded-full p-2 duration-300"><CiEdit style={{color:primary}} size={20} /></button>
+								<button className="hover:bg-gray-200 rounded-full p-2 duration-300"><CiEdit style={{ color: primary }} size={20} /></button>
 							</div>
-							<input className=" dark:bg-lightBlack1 px-3 py-2 rounded-md shadow-sm outline-none " type="text" name="name" id="name" defaultValue={userData.name} readOnly={true} />
+							<input className=" dark:bg-lightBlack1 px-3 py-2 rounded-md shadow-sm outline-none " type="text" name="name" id="name" defaultValue={users?.name} readOnly={true} />
 						</label>
 						<label className="flex flex-col px-2 gap-2" htmlFor="name">
 
 							<div className="flex items-center gap-1 justify-between">
 								<div className="flex items-center gap-1">
-									<button><MdEmail style={{color:primary}} size={15} /></button> <span>Email</span>
+									<button><MdEmail style={{ color: primary }} size={15} /></button> <span>Email</span>
 								</div>
-								<button className="hover:bg-gray-200 rounded-full p-2 duration-300"><CiEdit style={{color:primary}} size={20} /></button>
+								<button className="hover:bg-gray-200 rounded-full p-2 duration-300"><CiEdit style={{ color: primary }} size={20} /></button>
 							</div>
-							<input style={{ border: primary }} className="px-3 py-2 rounded-md shadow-sm outline-none focus:border dark:bg-lightBlack1" type="text" name="name" id="name" defaultValue={userData.email} readOnly={true} />
+							<input style={{ border: primary }} className="px-3 py-2 rounded-md shadow-sm outline-none focus:border dark:bg-lightBlack1" type="text" name="name" id="name" defaultValue={users?.email} readOnly={true} />
 						</label>
 						<label className="flex flex-col px-2 gap-2 mt-3" htmlFor="name">
 							<div className="flex items-center gap-1 justify-between">
 								<div className="flex items-center gap-1">
-									<button><MdFormatListNumbered  style={{color:primary}}size={15} /></button> <span>Id</span>
+									<button><MdFormatListNumbered style={{ color: primary }} size={15} /></button> <span>Id</span>
 								</div>
 							</div>
-							<input className="px-3 py-2 dark:bg-lightBlack1 rounded-md shadow-sm outline-none " type="text" name="name" id="name" defaultValue={userData.$id} readOnly={true} />
+							<input className="px-3 py-2 dark:bg-lightBlack1 rounded-md shadow-sm outline-none " type="text" name="name" id="name" defaultValue={users?.$id} readOnly={true} />
 						</label>
 						<label className="flex flex-col px-2 gap-2" htmlFor="name">
 
 							<div className="flex items-center gap-1 justify-between">
 								<div className="flex items-center gap-1">
-									<button><MdEmail style={{color:primary}} size={15} /></button> <span>Number</span>
+									<button><MdEmail style={{ color: primary }} size={15} /></button> <span>Number</span>
 								</div>
-								<button className="hover:bg-gray-200 rounded-full p-2 duration-300"><CiEdit style={{color:primary}} size={20} /></button>
+								<button className="hover:bg-gray-200 rounded-full p-2 duration-300"><CiEdit style={{ color: primary }} size={20} /></button>
 							</div>
 							<input style={{ border: primary }} className="px-3 py-2 rounded-md shadow-sm outline-none dark:bg-lightBlack1 focus:border" type="text" name="name" id="name" defaultValue={'Add Number'} readOnly={true} />
 						</label>
